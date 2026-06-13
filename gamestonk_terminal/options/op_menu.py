@@ -7,6 +7,19 @@ from gamestonk_terminal.options import volume as vol
 from gamestonk_terminal.menu import session
 
 
+def print_options(s_ticker):
+    """Print help"""
+    print(f"\nStock: {s_ticker}")
+    print("\nOptions:")
+    print("   help          show this options menu again")
+    print("   q             quit this menu, and go back to main menu")
+    print("   quit          quit to abandon program")
+    print("")
+    print("   volume        display volume graph for a specific expiry date [Yahoo Finance]")
+    print("   oi            display open interest graph for a specific expiry date [Yahoo Finance]")
+    print("")
+
+
 def opt_menu(s_ticker):
 
     # Add list of arguments that the options parser accepts
@@ -15,7 +28,7 @@ def opt_menu(s_ticker):
     opt_parser.add_argument("cmd", choices=choices)
     completer = NestedCompleter.from_nested_dict({c: None for c in choices})
 
-    # print_options(s_ticker, s_start, s_interval)
+    print_options(s_ticker)
 
     # Loop forever and ever
     while True:
@@ -37,8 +50,7 @@ def opt_menu(s_ticker):
             continue
 
         if ns_known_args.cmd == "help":
-            pass
-            # print_options(s_ticker)
+            print_options(s_ticker)
 
         elif ns_known_args.cmd == "q":
             # Just leave the options menu
